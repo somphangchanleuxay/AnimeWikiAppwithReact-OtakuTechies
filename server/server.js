@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 
 // Set up your routes, middleware, and other configurations here
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/public')));
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/', {
   useNewUrlParser: true,
