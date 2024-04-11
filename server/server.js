@@ -1,12 +1,20 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3001;
 const app = express();
 const path = require('path');
 
 // Set up your routes, middleware, and other configurations here
 app.use(express.static(path.join(__dirname, 'public')));
 
-const port = process.env.PORT || 3001; // Set the port with environment variable or default to 3001
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
