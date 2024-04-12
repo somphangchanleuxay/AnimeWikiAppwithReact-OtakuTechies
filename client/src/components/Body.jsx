@@ -1,5 +1,5 @@
 import { Center, Button } from '@chakra-ui/react';
-
+import { Link } from 'react-router-dom';
 
 const Body = () => {
     const paragraphStyle = {
@@ -23,7 +23,8 @@ const Body = () => {
       <div style={{ backgroundColor: 'black', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '16px',  height: '100%', width: '100%', paddingTop: '40px' }}>
         <center>
             <img src="https://images6.alphacoders.com/134/1345576.jpeg" alt="Jujitsu Kaisen" style={{ width: '1200px', height: '770px' }} />
-            <Button style={{ ...buttonStyle, fontFamily: '"Libre Baskerville", serif' }} mt={4}>Go to Homepage -&gt;</Button>
+            <Link to="/home"><Button style={{ ...buttonStyle, fontFamily: '"Libre Baskerville", serif' }} mt={4}>Go to Homepage -&gt;</Button>
+            </Link>
         </center>
         <center>
             <p style={paragraphStyle}>This is a website dedicated to all anime lovers out there. Whether you're looking for information about your favorite anime or want to read and discuss about the latest episodes, you've come to the right place.</p>
