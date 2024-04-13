@@ -30,7 +30,7 @@ const Navbar = () => {
         <Box bg="black" px={4} width="100%"> 
           <Flex direction="column" alignItems="center">
             {/* General navbar elements */}
-            <Link href="/" color="white" fontSize="100px" fontWeight="bold" mb={4}>
+            <Link href="/" color="white" fontSize="100px" fontFamily= 'Unica One' fontWeight="bold" mb={4}>
               Otaku-Ani
             </Link>
             <Flex>
