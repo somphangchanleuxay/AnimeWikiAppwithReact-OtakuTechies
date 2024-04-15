@@ -11,6 +11,7 @@ module.exports = {
     },
   }),
   authMiddleware({ req }) {
+    
     // Allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
@@ -23,6 +24,7 @@ module.exports = {
       return req;
     }
 
+    // if it does see one, itll try to verify
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
@@ -33,9 +35,13 @@ module.exports = {
 
     return req;
   },
+
+
   signToken({ firstName, email, _id }) {
+
     const payload = { firstName, email, _id };
 
+    // The secret is used to "sign" the token
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

@@ -42,6 +42,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
+  // token authentication middleware
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
