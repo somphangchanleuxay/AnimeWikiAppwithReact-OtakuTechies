@@ -11,12 +11,13 @@ const Homepage = () => {
       display: 'flex', 
       flexDirection: 'column', 
       justifyContent: 'center', 
-      alignItems: 'center' 
+      alignItems: 'center'
     }}>
       <div style={{ 
         backgroundColor: 'rgba(0, 0, 0, 0.5)', 
         padding: '20px', 
         borderRadius: '10px',
+        marginBottom: '480px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
