@@ -1,3 +1,6 @@
+import Footer from './Footer.jsx';
+
+
 const Homepage = () => {
   return (
     <div style={{ 
@@ -37,8 +40,8 @@ const Homepage = () => {
         </div>
       </div>
     </div>
+    <Footer />
     </div>
-  );
-};
+)};
 
 export default Homepage;

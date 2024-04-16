@@ -5,16 +5,16 @@ function Footer() {
     <Box as="footer" bg="gray.800" color="white" py={4} px={8}>
       <Flex justify="center">
         <Text fontSize="md">
-          <Link href="#">About Us</Link>
+          <Link href="/about">About Us</Link>
         </Text>
         <Text fontSize="md" mx={4}>
-          <Link href="#">Contact Us</Link>
+          <Link href="/contact">Contact Us</Link>
         </Text>
         <Text fontSize="md">
           <Link href="#">Privacy Policy</Link>
         </Text>
         <Text fontSize="md" mx={4}>
-          <Link href="#">Terms of Service</Link>
+          <Link href="/services">Services</Link>
         </Text>
       </Flex>
     </Box>
