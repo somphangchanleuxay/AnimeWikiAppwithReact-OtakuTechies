@@ -50,16 +50,16 @@ const startApolloServer = async () => {
     context: authMiddleware
   }));
 
-  // // Serve static files in production
-  // if (process.env.NODE_ENV === 'production') {
-  //   // Serve static files from the 'client/dist' directory
-  //   app.use(express.static(path.join(__dirname, '../client/public')));
+  // Serve static files in production
+  if (process.env.NODE_ENV === 'production') {
+    // Serve static files from the 'client/dist' directory
+    app.use(express.static(path.join(__dirname, '../client/public')));
 
-  //   // Serve index.html for all other routes
-  //   app.get('*', (req, res) => {
-  //     res.sendFile(path.join(__dirname, '../client/public/index.html'));
-  //   });
-  // }
+    // Serve index.html for all other routes
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/public/index.html'));
+    });
+  }
 
   // Once database connection is open, start listening for requests
   db.once('open', () => {
