@@ -1,4 +1,7 @@
+
 import Footer from './Footer';
+// import Login from './Login'; // Import the Login component
+
 import {
   Box,
   Button,
@@ -9,11 +12,6 @@ import {
 } from '@chakra-ui/react';
 
 const LoginSignup = () => {
-  const handleSubmitLogin = (event) => {
-    event.preventDefault();
-    console.log('Logging in...');
-  };
-
   const handleSubmitSignup = (event) => {
     event.preventDefault();
     console.log('Signing up...');
@@ -50,43 +48,13 @@ const LoginSignup = () => {
           marginTop="20px"
           marginBottom="20px"
         >
-
-          
           {/* Login Form */}
-          <form style={{ width: '40%', padding: '20px' }} onSubmit={handleSubmitLogin}>
-            <Stack spacing={3}>
-              <FormControl>
-                <FormLabel htmlFor="login-email" color="white">Email</FormLabel>
-                <Input 
-                  type="email" 
-                  id="login-email" 
-                  placeholder="Email" 
-                  bg="white"          // Change background color of text field
-                  color="black"       // Change text color
-                  _placeholder={{     // Change placeholder text color
-                    color: 'gray.400',
-                  }}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="login-password" color="white">Password</FormLabel>
-                <Input 
-                  type="password" 
-                  id="login-password" 
-                  placeholder="Password" 
-                  bg="white"          // Change background color of text field
-                  color="black"       // Change text color
-                  _placeholder={{     // Change placeholder text color
-                    color: 'gray.400',
-                  }}
-                />
-              </FormControl>
-              <Button type="submit" colorScheme="blue">Login</Button>
-            </Stack>
-          </form>
+          {/* <Stack spacing={3} style={{ width: '40%', padding: '20px' }}>
+            <Login />
+          </Stack> */}
 
-        {/* "Or" */}
-        <Box fontSize="3xl" fontWeight="bold" color="white" textAlign="center" width="10%">
+          {/* "Or" */}
+          <Box fontSize="3xl" fontWeight="bold" color="white" textAlign="center" width="10%">
             OR
           </Box>
 
@@ -99,11 +67,9 @@ const LoginSignup = () => {
                   type="text" 
                   id="signup-name" 
                   placeholder="Name" 
-                  bg="white"          // Change background color of text field
-                  color="black"       // Change text color
-                  _placeholder={{     // Change placeholder text color
-                    color: 'gray.400',
-                  }}
+                  bg="white"
+                  color="black"
+                  _placeholder={{ color: 'gray.400' }}
                 />
               </FormControl>
               <FormControl>
@@ -112,11 +78,9 @@ const LoginSignup = () => {
                   type="email" 
                   id="signup-email" 
                   placeholder="Email" 
-                  bg="white"          // Change background color of text field
-                  color="black"       // Change text color
-                  _placeholder={{     // Change placeholder text color
-                    color: 'gray.400',
-                  }}
+                  bg="white"
+                  color="black"
+                  _placeholder={{ color: 'gray.400' }}
                 />
               </FormControl>
               <FormControl>
@@ -125,11 +89,9 @@ const LoginSignup = () => {
                   type="password" 
                   id="signup-password" 
                   placeholder="Password" 
-                  bg="white"          // Change background color of text field
-                  color="black"       // Change text color
-                  _placeholder={{     // Change placeholder text color
-                    color: 'gray.400',
-                  }}
+                  bg="white"
+                  color="black"
+                  _placeholder={{ color: 'gray.400' }}
                 />
               </FormControl>
               <Button type="submit" colorScheme="blue">Sign Up</Button>
