@@ -2,7 +2,8 @@ import { ChakraProvider, Center } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Body from './components/Body';
-import Homepage from './components/Homepage'; // Import the Homepage component
+import Homepage from './components/Homepage'; 
+import LoginSignup from './components/LoginSignup'; 
 import './index.css';
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/home" element={<Homepage />} />
-          {/* Add more routes for other pages */}
+          <Route path="/login-signup" element={<LoginSignup />} />
         </Routes>
       </Router>
     </ChakraProvider>
