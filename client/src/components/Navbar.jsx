@@ -6,7 +6,7 @@ const Navbar = () => {
 
   // Render different elements based on the current route
   const renderNavbar = () => {
-    if (location.pathname === '/home' || location.pathname === '/login-signup' || location.pathname === '/contact') {
+    if (location.pathname === '/home' || location.pathname === '/login-signup' || location.pathname === '/contact'|| location.pathname === '/services'|| location.pathname === '/about') {
       return (
         <Box bg="black" px={4} width="100%" display="flex" justifyContent="space-between" alignItems="center">
           {/* Otaku-Ani logo on the left */}

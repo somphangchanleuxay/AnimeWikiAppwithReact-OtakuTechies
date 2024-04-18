@@ -11,7 +11,7 @@ function Footer() {
           <Link href="/contact">Contact Us</Link>
         </Text>
         <Text fontSize="md" mx={4}>
-          <Link href="/services">Services</Link>
+          <Link href="/services">Our Services</Link>
         </Text>
       </Flex>
     </Box>
