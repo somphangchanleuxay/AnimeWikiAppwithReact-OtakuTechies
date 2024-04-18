@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Use a meaningful default connection string if MONGODB_URI is not defined
 const defaultURI = 'mongodb://localhost:27017/otaku_db';
@@ -10,4 +11,4 @@ mongoose.connect(process.env.MONGODB_URI || defaultURI, {
   // Add other options if needed
 });
 
-module.exports = mongoose.connection;
+export default mongoose.connection;
