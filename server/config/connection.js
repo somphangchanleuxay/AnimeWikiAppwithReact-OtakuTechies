@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://datauser:superSecure@cluster0.athnlz7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+// Use a meaningful default connection string if MONGODB_URI is not defined
+const defaultURI = 'mongodb://localhost:27017/otaku_db';
+
+mongoose.connect(process.env.MONGODB_URI || defaultURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  // Add other options if needed
+});
 
 module.exports = mongoose.connection;
