@@ -1,6 +1,6 @@
 // const express = require('express');
 // const mongoose = require('mongoose');
-// const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3000;
 // const app = express();
 // const path = require('path');
 
@@ -24,11 +24,12 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+require('dotenv').config();
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const app = express();
 const server = new ApolloServer({
   typeDefs,
@@ -52,7 +53,6 @@ const startApolloServer = async () => {
   // Serve static files in production
   if (process.env.NODE_ENV === 'production') {
     // Serve static files from the 'client/dist' directory
-
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
     // Serve index.html for all other routes
@@ -62,11 +62,13 @@ const startApolloServer = async () => {
     });
   }
 
+  let useURL = "http://localhost";
+
   // Once database connection is open, start listening for requests
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+      console.log(`Use GraphQL at ${useURL}:${PORT}/graphql`);
     });
   });
 };
