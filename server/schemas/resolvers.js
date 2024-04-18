@@ -15,11 +15,11 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    amimes: async () => {
+    animes: async () => {
       return Anime.find();
     },
-    user: async (parent, { title }) => {
-      return User.findOne({ title });
+    anime: async (parent, { title }) => {
+      return Anime.findOne({ title });
     },
   },
 

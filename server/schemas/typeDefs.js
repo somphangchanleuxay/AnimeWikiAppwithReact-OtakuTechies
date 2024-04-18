@@ -24,14 +24,14 @@ const typeDefs = `
     me: User
     animes: [Anime]
     anime(title: String!): Anime
-    favorite: Anime
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addAnime(title: String!, description: String!, image: String): Auth
+    addAnime(title: String!, description: String!, image: String): Anime
     login(email: String!, password: String!): Auth
   }
 `;
 
 module.exports = typeDefs;
+
