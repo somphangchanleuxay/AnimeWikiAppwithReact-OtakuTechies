@@ -19,6 +19,7 @@
 //   console.log(`Server is running on port ${PORT}`);
 // });
 
+
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -35,26 +36,32 @@ const server = new ApolloServer({
   resolvers,
 });
 
-// Create a new instance of an Apollo server with the GraphQL schema
+// Function to start the Apollo Server
 const startApolloServer = async () => {
   await server.start();
 
-  app.use(express.urlencoded({ extended: false }));
+  // Parse incoming requests with JSON payloads
   app.use(express.json());
+  // Parse URL-encoded bodies for form submissions
+  app.use(express.urlencoded({ extended: false }));
 
-  // token authentication middleware
+  // Middleware for token authentication
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
 
+  // Serve static files in production
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    // Serve static files from the 'client/dist' directory
+    app.use(express.static(path.join(__dirname, '../client/public')));
 
+    // Serve index.html for all other routes
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../client/public/index.html'));
     });
   }
 
+  // Once database connection is open, start listening for requests
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
