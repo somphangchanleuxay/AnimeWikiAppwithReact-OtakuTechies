@@ -10,9 +10,6 @@ function Footer() {
         <Text fontSize="md" mx={4}>
           <Link href="/contact">Contact Us</Link>
         </Text>
-        <Text fontSize="md">
-          <Link href="#">Privacy Policy</Link>
-        </Text>
         <Text fontSize="md" mx={4}>
           <Link href="/services">Services</Link>
         </Text>
