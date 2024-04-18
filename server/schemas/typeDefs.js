@@ -6,6 +6,13 @@ const typeDefs = `
     password: String
   }
 
+  type Anime {
+    _id: ID
+    title: String
+    description: String
+    image: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -15,10 +22,14 @@ const typeDefs = `
     users: [User]
     user(username: String!): User
     me: User
+    animes: [Anime]
+    anime(title: String!): Anime
+    favorite: Anime
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
+    addAnime(title: String!, description: String!, image: String): Auth
     login(email: String!, password: String!): Auth
   }
 `;

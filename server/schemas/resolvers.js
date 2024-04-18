@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Anime } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -15,6 +15,12 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    amimes: async () => {
+      return Anime.find();
+    },
+    user: async (parent, { title }) => {
+      return User.findOne({ title });
+    },
   },
 
   Mutation: {
@@ -22,6 +28,10 @@ const resolvers = {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
+    },
+    addAnime: async (parent, { title, description, image }) => {
+      const anime = await Anime.create({ title, description, image });
+      return { anime };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
