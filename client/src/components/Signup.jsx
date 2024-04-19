@@ -52,14 +52,14 @@ const Signup = () => {
     <form style={{ width: '40%', padding: '20px' }} onSubmit={handleSubmitSignup}>
       <Stack spacing={3}>
         <FormControl isRequired>
-          <FormLabel htmlFor="signup-name" color="white">Name</FormLabel>
+          <FormLabel htmlFor="signup-username" color="white">Username</FormLabel>
           <Input 
             type="text" 
-            id="signup-name" 
-            name="username"
+            id="signup-username" 
+            name="username" // Make sure this matches the key in the formData state
             value={formData.username}
             onChange={handleChange}
-            placeholder="Name" 
+            placeholder="Username" 
             bg="white"
             color="black"
             _placeholder={{ color: 'gray.400' }}

@@ -2,7 +2,12 @@ import { jwtDecode } from 'jwt-decode';
 
 class AuthService{
   getProfile() {
-    return jwtDecode(this.getToken());
+    const token = this.getToken();
+    if (token) {
+      return jwtDecode(token);
+    } else {
+      return null;
+    }
   }
 
   loggedIn() {
@@ -32,6 +37,12 @@ class AuthService{
     window.location.assign('/');
   }
 
+  getUserId() {
+    const profile = this.getProfile();
+    return profile ? profile.id : null;
+  }
+
+  
   logout() {
     localStorage.removeItem('id_token');
     window.location.reload();
