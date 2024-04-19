@@ -9,7 +9,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/graphql': {
-        target: 'https://animewikiappwithreact-otakutechies.onrender.com',
+        target: 'https://animewikiappwithreact-otakutechies.onrender.com', // TODO change to site
         secure: false,
         changeOrigin: true
       }

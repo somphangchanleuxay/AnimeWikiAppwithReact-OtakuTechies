@@ -2,7 +2,7 @@ import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql', // Replace with your GraphQL API endpoint
+  uri: 'https://animewikiappwithreact-otakutechies.onrender.com/graphql',
   cache: new InMemoryCache(),
 });
 const ApolloAppProvider = ({ children }) => {
