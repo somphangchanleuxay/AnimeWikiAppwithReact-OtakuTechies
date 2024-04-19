@@ -1,16 +1,16 @@
 import { Button, FormControl, FormLabel, Input, Stack, useToast } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
-import { SIGNUP_USER } from '../utils/mutations';
+import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useState } from 'react'; 
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
   });
-  const [signup, { loading, error }] = useMutation(SIGNUP_USER);
+  const [signup, { loading, error }] = useMutation(ADD_USER);
   const toast = useToast();
 
   const handleChange = (event) => {
@@ -28,7 +28,8 @@ const Signup = () => {
         variables: formData
       });
 
-      Auth.login(data.signup.token); // Assuming your signup mutation returns a token
+      console.log(data)
+      Auth.login(data.addUser.token); // Assuming your signup mutation returns a token
       toast({
         title: "Signup Successful",
         description: "You have successfully signed up!",
@@ -55,8 +56,8 @@ const Signup = () => {
           <Input 
             type="text" 
             id="signup-name" 
-            name="name"
-            value={formData.name}
+            name="username"
+            value={formData.username}
             onChange={handleChange}
             placeholder="Name" 
             bg="white"
