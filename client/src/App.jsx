@@ -54,7 +54,6 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login-signup" element={<LoginSignup />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/test" element={<Test />} />
         </Routes>
       </Router>
     </ChakraProvider>
