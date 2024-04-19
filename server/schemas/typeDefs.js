@@ -30,6 +30,7 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!): Auth
     addAnime(title: String!, description: String!, image: String): Anime
     login(email: String!, password: String!): Auth
+    updatePassword(email: String!, oldPassword: String!, newPassword: String!): Auth
   }
 `;
 
