@@ -12,7 +12,6 @@ const GET_ANIME = gql`
 `;
 const AnimeList = () => {
   const { loading, error, data } = useQuery(GET_ANIME);
-  console.log(data);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
