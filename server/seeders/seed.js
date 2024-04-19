@@ -8,12 +8,13 @@ db.once('open', async () => {
   try {
     await cleanDB('User', 'users');
     await User.create(userSeeds);
+    await cleanDB('Anime', 'animes');
     await Anime.create(animeSeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);
   }
 
-  console.log('Users and anime seeded successfully!');
+  console.log('Seeded successfully!');
   process.exit(0);
 });
