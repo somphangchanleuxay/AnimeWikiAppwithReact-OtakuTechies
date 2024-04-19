@@ -10,7 +10,6 @@ const Navbar = () => {
   useEffect(() => {
     const updateProfile = () => {
       const profile = AuthService.getProfile();
-      console.log(profile); // Debug: Check the user profile in the console
       if (profile) {
         setUsername(profile.username); // Set username if profile exists
       } else {
