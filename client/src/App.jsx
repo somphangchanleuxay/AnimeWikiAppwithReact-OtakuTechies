@@ -13,7 +13,6 @@ import Homepage from './components/Homepage';
 import AboutPage from './components/AboutPage';
 import Services from './components/Services';
 import Contact from './components/Contact';
-import Test from './components/Test';
 import LoginSignup from './components/LoginSignup'; 
 import './index.css';
 
