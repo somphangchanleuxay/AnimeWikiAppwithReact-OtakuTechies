@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import Footer from './Footer';
+import { useState } from "react";
+import Footer from "./Footer";
 import {
   Box,
   Button,
@@ -8,14 +8,14 @@ import {
   Input,
   Textarea,
   Stack,
-} from '@chakra-ui/react';
-import emailjs from 'emailjs-com';
+} from "@chakra-ui/react";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -25,15 +25,24 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_001cih8', 'template_x4cgo8j', e.target, 'wXU1oyIwgqiAUEKQD')
-      .then((result) => {
-        console.log(result.text);
-        alert('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      }, (error) => {
-        console.log(error.text);
-        alert('Failed to send message. Please try again later.');
-      });
+    emailjs
+      .sendForm(
+        "service_001cih8",
+        "template_x4cgo8j",
+        e.target,
+        "wXU1oyIwgqiAUEKQD"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Message sent successfully!");
+          setFormData({ name: "", email: "", message: "" });
+        },
+        (error) => {
+          console.log(error.text);
+          alert("Failed to send message. Please try again later.");
+        }
+      );
   };
 
   return (
@@ -43,6 +52,7 @@ const Contact = () => {
         backgroundImage="url(https://wallpapercave.com/wp/crs8YVV.jpg)"
         backgroundSize="cover"
         backgroundPosition="center"
+        backgroundAttachment="fixed"
         display="flex"
         flexDirection="column"
         justifyContent="center"
@@ -60,10 +70,15 @@ const Contact = () => {
           width="100%"
           margin="0 auto"
         >
-          <form style={{ width: '100%', padding: '20px' }} onSubmit={handleSubmit}>
+          <form
+            style={{ width: "100%", padding: "20px" }}
+            onSubmit={handleSubmit}
+          >
             <Stack spacing={3} width="100%">
               <FormControl>
-                <FormLabel htmlFor="name" color="white">Name</FormLabel>
+                <FormLabel htmlFor="name" color="white">
+                  Name
+                </FormLabel>
                 <Input
                   type="text"
                   id="name"
@@ -74,13 +89,15 @@ const Contact = () => {
                   bg="white"
                   color="black"
                   _placeholder={{
-                    color: 'gray.400',
+                    color: "gray.400",
                   }}
                   required
                 />
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor="email" color="white">Email</FormLabel>
+                <FormLabel htmlFor="email" color="white">
+                  Email
+                </FormLabel>
                 <Input
                   type="email"
                   id="email"
@@ -91,13 +108,15 @@ const Contact = () => {
                   bg="white"
                   color="black"
                   _placeholder={{
-                    color: 'gray.400',
+                    color: "gray.400",
                   }}
                   required
                 />
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor="message" color="white">Message</FormLabel>
+                <FormLabel htmlFor="message" color="white">
+                  Message
+                </FormLabel>
                 <Textarea
                   id="message"
                   name="message"
@@ -107,17 +126,19 @@ const Contact = () => {
                   bg="white"
                   color="black"
                   _placeholder={{
-                    color: 'gray.400',
+                    color: "gray.400",
                   }}
                   required
                 />
               </FormControl>
-              <Button type="submit" colorScheme="blue" width="100%">Send Message</Button>
+              <Button type="submit" colorScheme="blue" width="100%">
+                Send Message
+              </Button>
             </Stack>
           </form>
         </Box>
       </Box>
-      <Footer style={{ width: '100%' }} /> 
+      <Footer style={{ width: "100%" }} />
     </>
   );
 };

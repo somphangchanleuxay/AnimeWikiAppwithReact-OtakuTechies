@@ -29,7 +29,7 @@ const Signup = () => {
       });
 
       console.log(data)
-      Auth.login(data.addUser.token); // Assuming your signup mutation returns a token
+      Auth.login(data.addUser.token); 
       toast({
         title: "Signup Successful",
         description: "You have successfully signed up!",
