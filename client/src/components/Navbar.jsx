@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Box, Flex, Link, Button } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import AuthService from '../utils/auth';
@@ -46,7 +46,7 @@ const Navbar = () => {
             {AuthService.loggedIn() && (
               <>
                 <span style={{ color: 'white', fontSize: '16px', marginRight: '4px', backgroundColor:'#3182ce', width: '95px', textAlign: 'center', height: '41px', display: 'flex', alignItems: 'center', justifyContent:'center', borderRadius: '7px'}}>
-                  Logged in
+                  Logged in {username}
                 </span>
                 <Button colorScheme="red" ml={4} onClick={handleLogout}>
                   Logout

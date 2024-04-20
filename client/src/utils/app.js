@@ -1,4 +1,4 @@
-import React from 'react';
+
 import ApolloAppProvider from './ApolloProvider';
 
 const App = () => {
