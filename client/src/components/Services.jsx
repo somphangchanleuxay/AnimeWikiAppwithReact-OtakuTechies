@@ -5,15 +5,16 @@ const ServicesPage = () => {
     <>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          backgroundImage: 'url(https://wallpapercave.com/wp/crs8YVV.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          padding: '20px'
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          backgroundImage: "url(https://wallpapercave.com/wp/crs8YVV.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed", 
+          padding: "20px",
         }}
       >
         <div
