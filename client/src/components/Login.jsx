@@ -81,11 +81,11 @@ const Login = () => {
         </Stack>
       </form>
 
-      {/* {error && (
+      {error && (
         <Box my={3} p={3} bg="red.500" color="white">
           {error.message}
         </Box>
-      )} */}
+      )}
     </Box>
   );
 };
