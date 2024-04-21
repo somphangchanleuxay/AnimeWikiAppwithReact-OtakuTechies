@@ -1,4 +1,5 @@
 
+import Homepage from '../components/Homepage';
 import ApolloAppProvider from './ApolloProvider';
 
 const App = () => {
