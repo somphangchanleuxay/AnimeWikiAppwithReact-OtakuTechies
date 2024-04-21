@@ -26,14 +26,12 @@ const typeDefs = `
     me: User
     animes: [Anime]
     anime(title: String!): Anime
-    searchAnime(query: String!): [String!]!
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     addAnime(title: String!, description: String!, image: String): Anime
     login(email: String!, password: String!): Auth
-    searchAnime(query:String!):[Anime]
   }
 `;
 
