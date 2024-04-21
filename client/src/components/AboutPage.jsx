@@ -30,7 +30,7 @@ const AboutPage = () => {
             marginBottom: '20px'
           }}
         >
-          <h1 style={{ fontFamily: 'Anime Ace', fontSize: '36px', color: 'white', textAlign: 'center' }}>
+          <h1 style={{ fontFamily: 'Anime Ace', fontSize: '60px', color: 'white', textAlign: 'center' }}>
             About Us
           </h1>
           <p style={{ marginTop: '20px', fontFamily: 'Arial, sans-serif', fontSize: '24px', color: 'yellow', textAlign: 'center' }}>
