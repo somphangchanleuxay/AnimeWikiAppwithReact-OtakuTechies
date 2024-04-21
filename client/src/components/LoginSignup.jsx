@@ -19,6 +19,7 @@ const LoginSignup = () => {
         backgroundImage="url(https://wallpapercave.com/wp/crs8YVV.jpg)"
         backgroundSize="cover"
         backgroundPosition="center"
+        backgroundAttachment="fixed"
         display="flex"
         flexDirection="column"
         justifyContent="center"

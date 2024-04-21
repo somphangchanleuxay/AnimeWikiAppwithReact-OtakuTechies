@@ -1,12 +1,30 @@
-import { useLocation } from 'react-router-dom';
+
 import { Box, Flex, Link, Button } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
+import AuthService from '../utils/auth';
 
 const Navbar = () => {
   const location = useLocation();
 
+  // Function to handle logout
+  const handleLogout = () => {
+    AuthService.logout();
+  };
+
   // Render different elements based on the current route
   const renderNavbar = () => {
-    if (location.pathname === '/home' || location.pathname === '/login-signup' || location.pathname === '/contact'|| location.pathname === '/services'|| location.pathname === '/about') {
+    // Get the user's profile
+    const profile = AuthService.getProfile();
+    // Extract username from profile
+    const username = profile ? profile.username : null;
+
+    if (
+      location.pathname === '/home' ||
+      location.pathname === '/login-signup' ||
+      location.pathname === '/contact' ||
+      location.pathname === '/services' ||
+      location.pathname === '/about'
+    ) {
       return (
         <Box bg="black" px={4} width="100%" display="flex" justifyContent="space-between" alignItems="center">
           {/* Otaku-Ani logo on the left */}
@@ -14,16 +32,42 @@ const Navbar = () => {
             <div style={{ width: '131px', height: '81px', backgroundColor: 'black', fontFamily: 'Unica One', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '31px', color: 'white' }}>Otaku-Ani</div>
           </Link>
           {/* About, Services, and Contact links on the right */}
-          <Flex>
-            <Link href="/about" color="white" mr={4} fontSize="24px" ml={2}>About</Link>
-            <Link href="/services" color="white" mr={4} fontSize="24px" ml={2}>Services</Link>
-            <Link href="/contact" color="white" mr={4} fontSize="24px" ml={2}>Contact</Link>
-            <Button colorScheme="blue" ml={4}>
-              <Link href="/login-signup" style={{ color: 'white', textDecoration: 'none' }}>Login</Link>
-            </Button>
-            <Button colorScheme="green" ml={4}>
-              <Link href="/login-signup" style={{ color: 'white', textDecoration: 'none' }}>Sign Up</Link>
-            </Button>
+          <Flex alignItems="center">
+            <Link href="/about" color="white" mr={4} fontSize="24px">
+              About
+            </Link>
+            <Link href="/services" color="white" mr={4} fontSize="24px">
+              Services
+            </Link>
+            <Link href="/contact" color="white" mr={4} fontSize="24px">
+              Contact
+            </Link>
+            {/* Display the username if logged in */}
+            {AuthService.loggedIn() && (
+              <>
+                <span style={{ color: 'white', fontSize: '16px', marginRight: '4px', backgroundColor:'#3182ce', width: '95px', textAlign: 'center', height: '41px', display: 'flex', alignItems: 'center', justifyContent:'center', borderRadius: '7px'}}>
+                  Logged in {username}
+                </span>
+                <Button colorScheme="red" ml={4} onClick={handleLogout}>
+                  Logout
+                </Button>
+              </>
+            )}
+            {/* Render login and sign up buttons */}
+            {!AuthService.loggedIn() && (
+              <>
+                <Button colorScheme="blue" ml={4}>
+                  <Link href="/login-signup" style={{ color: 'white', textDecoration: 'none' }}>
+                    Login
+                  </Link>
+                </Button>
+                <Button colorScheme="green" ml={4}>
+                  <Link href="/login-signup" style={{ color: 'white', textDecoration: 'none' }}>
+                    Sign Up
+                  </Link>
+                </Button>
+              </>
+            )}
           </Flex>
         </Box>
       );

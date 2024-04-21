@@ -1,23 +1,33 @@
+import React, { useState } from 'react';
 import Footer from './Footer';
+import Search from './Search';
 
 const Homepage = () => {
+  const handleSearch = (query) => {
+    //put search logic here
+    console.log('Search query:', query)
+  };
+
   return (
     <div style={{ 
       display: 'flex',
       flexDirection: 'column',
       minHeight: '100vh', 
     }}>
-      <div style={{ 
-        flex: '1', 
-        backgroundImage: 'url(https://wallpapercave.com/wp/crs8YVV.jpg)', 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        padding: '20px' 
-      }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          backgroundImage: "url(https://wallpapercave.com/wp/crs8YVV.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          padding: "20px",
+        }}
+      >
         <div style={{ 
           backgroundColor: 'rgba(0, 0, 0, 0.5)', 
           padding: '20px', 

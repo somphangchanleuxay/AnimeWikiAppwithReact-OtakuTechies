@@ -1,23 +1,3 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const PORT = process.env.PORT || 3000;
-// const app = express();
-// const path = require('path');
-
-// // Set up your routes, middleware, and other configurations here
-// app.use(express.static(path.join(__dirname, '../client/public')));
-
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -61,13 +41,11 @@ const startApolloServer = async () => {
     });
   }
 
-  let useURL = "http://localhost";
-
   // Once database connection is open, start listening for requests
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at ${useURL}:${PORT}/graphql`);
+      console.log(`Use GraphQL at ${PORT}/graphql`);
     });
   });
 };
