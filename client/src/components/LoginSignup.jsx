@@ -1,6 +1,6 @@
 
 import Footer from './Footer';
-import Login from './Login'; // Import the Login component
+import Login from './Login'; 
 import Signup from './Signup';
 
 
