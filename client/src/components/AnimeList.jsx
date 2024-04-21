@@ -14,7 +14,7 @@ const GET_ANIMES = gql`
 const AnimeList = () => {
   const { loading, error, data } = useQuery(GET_ANIMES);
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (error) return <p>Error :</p>;
   return (
     <ul>
       {data.animes.map((anime) => (
