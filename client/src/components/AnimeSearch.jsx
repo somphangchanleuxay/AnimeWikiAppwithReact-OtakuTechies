@@ -1,6 +1,9 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import '../../src/css/Button.css';
 
 const GET_ANIME = gql`
   query GetAnime($title: String!) {
@@ -20,6 +23,7 @@ const AnimeSearch = () => {
 
   const { loading, error, data } = useQuery(GET_ANIME, {
     variables: { title: queryTitle },
+    skip: !queryTitle, // Ensure the query is skipped if the title is empty
   });
 
   const handleSearchChange = (e) => {
@@ -34,6 +38,11 @@ const AnimeSearch = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const handleFavorite = (resultId) => {
+    // Handle favorite button click for a specific result
+    console.log('Toggle favorite for result:', resultId);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -46,11 +55,14 @@ const AnimeSearch = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {data.anime && (
-        <div>
+      {data && data.anime && (
+        <div style={{ margin: '10px', padding: '10px', border: '1px solid black' }}>
           <h1>{data.anime.title}</h1>
           <p>{data.anime.description}</p>
-          <img src={data.anime.image} alt={data.anime.title} />
+          <img src={data.anime.image} alt={data.anime.title} style={{ maxWidth: '300px' }} />
+          <button onClick={() => handleFavorite(data.anime._id)} className="favoriteButton">
+            <FontAwesomeIcon icon={faHeart} />
+          </button>
         </div>
       )}
     </div>
