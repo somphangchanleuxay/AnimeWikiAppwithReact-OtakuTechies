@@ -1,4 +1,5 @@
 import Footer from './Footer';
+import AnimeFavs from './AnimeFavs'; 
 
 const Favorites = () => {
   return (
@@ -22,6 +23,10 @@ const Favorites = () => {
         }}
       >
     
+ <div>
+ <AnimeFavs />
+</div>
+
       </div>
       <Footer style={{ width: '100%' }} />
     </div>
