@@ -26,8 +26,7 @@ const LoginSignup = () => {
         alignItems="center"
         padding="20px"
       >
-        {/* Otaku Image */}
-        <img src='/images/Otaku-Ani.gif' alt="Anime Image" style={{ maxWidth: '100%', borderRadius: '10px', marginBottom: '20px' }} />
+      
         
         {/* Login and Signup Forms */}
         <Box
