@@ -19,26 +19,27 @@ const GET_ANIME = gql`
 `;
 
 const FAV_ADD = gql`
-mutation Mutation($title: String!, $someone: String!) {
-  favAdd(title: $title, someone: $someone) {
-    _id
-    email
-    favorites
-    username
+  mutation Mutation($title: String!, $someone: String!) {
+    favAdd(title: $title, someone: $someone) {
+      _id
+      email
+      favorites
+      username
+    }
   }
-}
-`
+`;
 
 const FAV_REMOVE = gql`
-mutation Mutation($someone: String!, $title: String!) {
-  favRemove(someone: $someone, title: $title) {
-    _id
-    email
-    favorites
-    username
+  mutation Mutation($someone: String!, $title: String!) {
+    favRemove(someone: $someone, title: $title) {
+      _id
+      email
+      favorites
+      username
+    }
   }
-}
-`
+`;
+
 const AnimeSearch = () => {
   const [searchTitle, setSearchTitle] = useState('');
   const { title: defaultTitle } = useParams();
@@ -71,15 +72,12 @@ const AnimeSearch = () => {
       }
     });
 
-  const[favRemove] = useMutation(FAV_REMOVE,
+  const [favRemove] = useMutation(FAV_REMOVE,
     {
       variables: { someone: "Brian Kernighan", title: "My Hero Academia" },
       onCompleted: (data) => {
       }
     });
-
-  const handleSearchChange = (e) => {
-    setSearchTitle(e.target.value);
 
   const handleSearchChange = (e, { newValue }) => {
     setSearchTitle(newValue);
@@ -93,14 +91,13 @@ const AnimeSearch = () => {
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite); // Toggle favorite status
-     
+
     if (isFavorite) {
       favRemove();
+    } else {
+      favAdd();
     }
-    else {
-       favAdd();
-    }
-    
+
   };
 
   const getSuggestions = (inputValue) => {
@@ -140,10 +137,10 @@ const AnimeSearch = () => {
         </button>
       </form>
       {!loading && !data?.anime && searched && (
-  <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
-    <img src={errorGif} alt="Error" />
-    <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
-  </div>
+        <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
+          <img src={errorGif} alt="Error" />
+          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
+        </div>
       )}
       {data?.anime && (
         <div className="searchResultContainer" style={{ position: 'relative' }}>
