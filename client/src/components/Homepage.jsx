@@ -1,5 +1,4 @@
 import Footer from './Footer';
-import AnimeList from './AnimeList';
 import AnimeSearch from './AnimeSearch';
 
 const Homepage = () => {
