@@ -1,10 +1,11 @@
 
-import { Box, Flex, Link, Button } from '@chakra-ui/react';
+import { Box, Flex, Link, Button,useMediaQuery } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import AuthService from '../utils/auth';
 
 const Navbar = () => {
   const location = useLocation();
+  const [isSmallerThan750] = useMediaQuery('(max-width: 750px)');
 
   // Function to handle logout
   const handleLogout = () => {
@@ -26,33 +27,36 @@ const Navbar = () => {
       location.pathname === '/about'
     ) {
       return (
-        <Box bg="black" px={4} width="100%" display="flex" justifyContent="space-between" alignItems="center">
+        <Box bg="black" px={4} width="100%" display="flex" justifyContent="space-between" alignItems="center" flexDirection={isSmallerThan750 ? 'column' : 'row'}>
           {/* Otaku-Ani logo on the left */}
           <Link href="/" style={{ textDecoration: 'none' }}>
             <div style={{ width: '131px', height: '81px', backgroundColor: 'black', fontFamily: 'Unica One', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '31px', color: 'white' }}>Otaku-Ani</div>
+            </Link>
+        {/* Navbar links */}
+        <Flex flex direction={isSmallerThan750 ? 'column' : 'row'} alignItems="center">
+          <Link href="/home" color="white" mr={isSmallerThan750 ? 0 : 4} mt={isSmallerThan750 ? 2 : 0} fontSize="28px">
+            Search
           </Link>
-          {/* About, Services, and Contact links on the right */}
-          <Flex alignItems="center">
-            <Link href="/about" color="white" mr={4} fontSize="24px">
-              About
-            </Link>
-            <Link href="/services" color="white" mr={4} fontSize="24px">
-              Services
-            </Link>
-            <Link href="/contact" color="white" mr={4} fontSize="24px">
-              Contact
-            </Link>
-            {/* Display the username if logged in */}
-            {AuthService.loggedIn() && (
-              <>
-                <span style={{ color: 'white', fontSize: '16px', marginRight: '4px', backgroundColor:'#3182ce', width: '95px', textAlign: 'center', height: '41px', display: 'flex', alignItems: 'center', justifyContent:'center', borderRadius: '7px'}}>
-                  Logged in {username}
-                </span>
-                <Button colorScheme="red" ml={4} onClick={handleLogout}>
-                  Logout
-                </Button>
-              </>
-            )}
+          <Link href="/about" color="white" mr={isSmallerThan750 ? 0 : 4} mt={isSmallerThan750 ? 2 : 0} fontSize="28px" ml={4}>
+            About
+          </Link>
+          <Link href="/services" color="white" mr={isSmallerThan750 ? 0 : 4} mt={isSmallerThan750 ? 2 : 0} fontSize="28px" ml={4}>
+            Services
+          </Link>
+          <Link href="/contact" color="white" mt={isSmallerThan750 ? 2 : 0} fontSize="28px" ml={4}>
+            Contact
+          </Link>
+          {/* Display the username if logged in */}
+          {AuthService.loggedIn() && (
+            <>
+              <span style={{ color: 'white', fontSize: '16px', marginRight: '4px', backgroundColor:'#3182ce', width: '95px', textAlign: 'center', height: '41px', display: 'flex', alignItems: 'center', justifyContent:'center', borderRadius: '7px'}}>
+                Logged in {username}
+              </span>
+              <Button colorScheme="red" ml={4} onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
+          )}
             {/* Render login and sign up buttons */}
             {!AuthService.loggedIn() && (
               <>
@@ -81,6 +85,9 @@ const Navbar = () => {
               Otaku-Ani
             </Link>
             <Flex>
+            <Link href="/home" color="white" mr={24} fontSize="28px">
+                Search
+              </Link>
               <Link href="/about" color="white" mr={24} fontSize="28px">
                 About
               </Link>
@@ -93,7 +100,7 @@ const Navbar = () => {
             </Flex>
           </Flex>
         </Box>
-      );
+      )
     }
   };
 

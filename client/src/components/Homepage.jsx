@@ -43,7 +43,6 @@ const Homepage = () => {
         </div>
         <div>
           <div>
-          <h1>Results:</h1>
           <AnimeSearch />
           </div>
           {/* TODO - style for show all or comment out */}
