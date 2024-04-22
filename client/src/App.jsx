@@ -15,6 +15,7 @@ import Services from './components/Services';
 import Contact from './components/Contact';
 import LoginSignup from './components/LoginSignup'; 
 import './index.css';
+import Favorites from './components/Favorites';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -52,7 +53,7 @@ const App = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login-signup" element={<LoginSignup />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </Router>
     </ChakraProvider>
