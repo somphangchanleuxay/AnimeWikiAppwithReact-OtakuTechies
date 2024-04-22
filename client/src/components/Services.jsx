@@ -33,7 +33,7 @@ const ServicesPage = () => {
             height: '1500px'
           }}
         >
-          <h1 style={{ fontFamily: 'Anime Ace', fontSize: '60px', color: 'white', textAlign: 'center' }}>
+          <h1 style={{ fontFamily: 'Anime Ace', fontSize: '50px', color: 'white', textAlign: 'center' }}>
             Our Services
           </h1>
           <div style={{ maxWidth: '600px', width: '100%', marginTop: '-170px' }}>
