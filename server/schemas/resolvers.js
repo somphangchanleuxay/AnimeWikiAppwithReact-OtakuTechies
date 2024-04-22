@@ -23,17 +23,7 @@ const resolvers = {
     },
   },
 
-  Mutation:
-       { searchAnime: async (_, {query}, {Anime})=> {
-        try {
-          const regex = new RegExp(query, 'i');
-          const searchResults = await Anime.find({title:regex}) //Preforms the search
-          return searchResults; //Returns the search
-        } catch (error){
-          console.log (error);
-          throw new Error ('Internal Server Error');
-        }
-      },
+  Mutation:{
 
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
