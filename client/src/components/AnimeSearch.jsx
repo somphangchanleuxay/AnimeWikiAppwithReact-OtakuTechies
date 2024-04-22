@@ -52,13 +52,13 @@ const AnimeSearch = () => {
             value={searchTitle}
             onChange={handleSearchChange}
             placeholder="Search anime by title"
-            style={{ padding: '10px', fontSize: '40px', width: '300px', borderRadius: '5px', border: 'none', marginBottom: '10px' }}
+            style={{ padding: '10px', fontSize: '16px', width: '300px', borderRadius: '5px', border: 'none', marginBottom: '10px' }}
           />
           <button type="submit" className="searchButton">Search</button>
         </form>
         <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
           <img src={errorGif} alt="Error" />
-          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
+          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>You didn't follow instructions.<br />No results found.😔</p>
         </div>
       </div>
     );
@@ -82,7 +82,7 @@ const AnimeSearch = () => {
           <div style={{ marginBottom: '10px', width: '300px', height: '300px' }}>
             <img src={data.anime.image} alt={data.anime.title} style={{ borderRadius: '5px', width: '100%', height: '100%' }} />
           </div>
-          <h1 style={{ fontWeight: 'bold' }}>{data.anime.title}</h1>
+          <h1 style={{ fontWeight: 'bold', fontSize: '32px' }}>{data.anime.title}</h1>
           <p>{data.anime.description}</p>
         </div>
       )}
