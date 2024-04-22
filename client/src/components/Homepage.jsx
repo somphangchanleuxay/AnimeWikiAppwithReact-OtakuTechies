@@ -46,7 +46,7 @@ const Homepage = () => {
           <div>
             <AnimeSearch />
           </div>
-        </div>
+        </div>       
         <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '20px', borderRadius: '10px', marginTop: '20px' }}>
           <p style={{ marginTop: '20px', fontFamily: 'Arial, sans-serif', fontSize: '24px', color: 'red', textAlign: 'center', fontWeight: 'bold', textDecoration: 'underline' }}>
             Animes Currently Available
