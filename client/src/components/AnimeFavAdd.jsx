@@ -18,8 +18,9 @@ const AnimeFavAdd = (props) => {
   );
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
-  console.log("Add:", username, title, loading, error, data); // DELETE
   return favAdd({ variables: { type: input.value }});
+
+  favAdd;
 }
 
 export default AnimeFavAdd;

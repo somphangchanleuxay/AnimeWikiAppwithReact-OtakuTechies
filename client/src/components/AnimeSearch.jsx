@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { FaHeart } from 'react-icons/fa';
-import loadingGif from './LoadingGIF.webp'; 
-import errorGif from './ErrorGIF.gif'; 
+import loadingGif from './LoadingGIF.webp';
+import errorGif from './ErrorGIF.gif';
 import '../css/Button.css';
 
 const GET_ANIME = gql`
@@ -17,6 +17,27 @@ const GET_ANIME = gql`
   }
 `;
 
+const FAV_ADD = gql`
+mutation Mutation($title: String!, $someone: String!) {
+  favAdd(title: $title, someone: $someone) {
+    _id
+    email
+    favorites
+    username
+  }
+}
+`
+
+const FAV_REMOVE = gql`
+mutation Mutation($someone: String!, $title: String!) {
+  favRemove(someone: $someone, title: $title) {
+    _id
+    email
+    favorites
+    username
+  }
+}
+`
 const AnimeSearch = () => {
   const [searchTitle, setSearchTitle] = useState("");
   const { title: defaultTitle } = useParams();
@@ -27,6 +48,20 @@ const AnimeSearch = () => {
   const { loading, error, data } = useQuery(GET_ANIME, {
     variables: { title: queryTitle },
   });
+
+  const [favAdd] = useMutation(FAV_ADD,
+    {
+      variables: { someone: "Brian Kernighan", title: "My Hero Academia" },
+      onCompleted: (data) => {
+      }
+    });
+
+  const[favRemove] = useMutation(FAV_REMOVE,
+    {
+      variables: { someone: "Brian Kernighan", title: "My Hero Academia" },
+      onCompleted: (data) => {
+      }
+    });
 
   const handleSearchChange = (e) => {
     setSearchTitle(e.target.value);
@@ -40,6 +75,14 @@ const AnimeSearch = () => {
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite); // Toggle favorite status
+     
+    if (isFavorite) {
+      favRemove();
+    }
+    else {
+       favAdd();
+    }
+    
   };
 
   if (loading) return <img src={loadingGif} alt="Loading..." />; // Display the loading GIF while loading
