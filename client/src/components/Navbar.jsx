@@ -139,7 +139,6 @@ const Navbar = () => {
                 alignItems: "center",
                 fontSize: "70px",
                 color: "white",
-                marginLeft: isSmallerThan750 ? "0" : "900px", // Adjust margin based on screen size
                 marginBottom: isSmallerThan750 ? "20px" : "0", // Adjust margin bottom based on screen size
               }}
             >
@@ -154,6 +153,49 @@ const Navbar = () => {
             alignItems="center"
             justifyContent="space-between" // Align items with space between them
           >
+            <Link
+              href="/home"
+              color="white"
+              mr={isSmallerThan750 ? 0 : 4}
+              mt={isSmallerThan750 ? 2 : 0}
+              fontSize="24px"
+              fontFamily="Unica One; Arial"
+            >
+              Search
+            </Link>
+            <Link
+              href="/about"
+              color="white"
+              mr={isSmallerThan750 ? 0 : 4}
+              mt={isSmallerThan750 ? 2 : 0}
+              fontSize="24px"
+              fontFamily="Unica One; Arial"
+              ml={4}
+            >
+              About
+            </Link>
+            <Link
+              href="/services"
+              color="white"
+              mr={isSmallerThan750 ? 0 : 4}
+              mt={isSmallerThan750 ? 2 : 0}
+              fontSize="24px"
+              fontFamily="Unica One; Arial"
+              ml={4}
+            >
+              Services
+            </Link>
+            <Link
+              href="/contact"
+              color="white"
+              mt={isSmallerThan750 ? 2 : 0}
+              fontSize="24px"
+              fontFamily="Unica One; Arial"
+              marginRight="35px"
+              ml={4}
+            >
+              Contact
+            </Link>
             {/* Display the username if logged in */}
             {AuthService.loggedIn() && (
               <>
