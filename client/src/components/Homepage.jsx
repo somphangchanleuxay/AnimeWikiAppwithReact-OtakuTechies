@@ -39,7 +39,7 @@ const Homepage = () => {
         }}>
           <img src='/images/Otaku-Ani.gif' alt="Anime Image" style={{ maxWidth: '100%', borderRadius: '10px' }} />
           <p style={{ marginTop: '20px', fontFamily: 'Arial, sans-serif', fontSize: '24px', color: 'yellow', textAlign: 'center' }}>
-            You can look up your favorite anime/manga and sign in to save it to your favorites. Enter exactly as shown without the stars.
+            You can look up your favorite anime/manga and sign in to save it to your favorites.
           </p>
         </div>
         <div>
@@ -57,7 +57,7 @@ const Homepage = () => {
           <AnimeTitle title="Death Note" />
           <AnimeTitle title="Solo Leveling" />
           <AnimeTitle title="One Piece" />
-          <AnimeTitle title="Hunter x Hunter" />
+          <AnimeTitle title="Hunter x Hunter (2011)" />
           <AnimeTitle title="One-Punch Man" />
           <AnimeTitle title="Tokyo Ghoul" />
           <AnimeTitle title="Chainsaw Man" />

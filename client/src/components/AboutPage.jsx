@@ -34,7 +34,7 @@ const AboutPage = () => {
           <h1
             style={{
               fontFamily: "Anime Ace",
-              fontSize: "36px",
+              fontSize: "50px",
               color: "white",
               textAlign: "center",
             }}

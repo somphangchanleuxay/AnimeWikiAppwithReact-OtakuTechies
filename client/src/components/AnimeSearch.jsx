@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { FaHeart } from 'react-icons/fa';
+import Autosuggest from 'react-autosuggest';
 import loadingGif from './LoadingGIF.webp';
 import errorGif from './ErrorGIF.gif';
 import '../css/Button.css';
@@ -39,11 +40,25 @@ mutation Mutation($someone: String!, $title: String!) {
 }
 `
 const AnimeSearch = () => {
-  const [searchTitle, setSearchTitle] = useState("");
+  const [searchTitle, setSearchTitle] = useState('');
   const { title: defaultTitle } = useParams();
-  const [queryTitle, setQueryTitle] = useState(defaultTitle || "");
+  const [queryTitle, setQueryTitle] = useState(defaultTitle || '');
   const [isFavorite, setIsFavorite] = useState(false); // Track favorite status
   const [searched, setSearched] = useState(false); // Track if search button was pressed
+  const [suggestions, setSuggestions] = useState([]); // Suggestions state
+
+  const animeTitles = [
+    "My Hero Academia",
+    "Attack on Titan",
+    "SPY x FAMILY",
+    "Death Note",
+    "Solo Leveling",
+    "One Piece",
+    "Hunter x Hunter (2011)",
+    "One-Punch Man",
+    "Tokyo Ghoul",
+    "Chainsaw Man"
+  ];
 
   const { loading, error, data } = useQuery(GET_ANIME, {
     variables: { title: queryTitle },
@@ -65,6 +80,9 @@ const AnimeSearch = () => {
 
   const handleSearchChange = (e) => {
     setSearchTitle(e.target.value);
+
+  const handleSearchChange = (e, { newValue }) => {
+    setSearchTitle(newValue);
   };
 
   const handleSubmit = (e) => {
@@ -85,41 +103,49 @@ const AnimeSearch = () => {
     
   };
 
-  if (loading) return <img src={loadingGif} alt="Loading..." />; // Display the loading GIF while loading
-  if (!data.anime && searched) { // Display no results only if search button was pressed
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={searchTitle}
-            onChange={handleSearchChange}
-            placeholder="Search anime by title"
-            style={{ padding: '10px', fontSize: '16px', width: '300px', borderRadius: '5px', border: 'none', marginBottom: '10px' }}
-          />
-          <button type="submit" className="searchButton">Search</button>
-        </form>
-        <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
-          <img src={errorGif} alt="Error" />
-          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>You didn't follow instructions.<br />No results found.😔</p>
-        </div>
-      </div>
-    );
-  }
+  const getSuggestions = (inputValue) => {
+    const inputValueLowerCase = inputValue.trim().toLowerCase();
+    return animeTitles.filter(
+      (title) => title.toLowerCase().startsWith(inputValueLowerCase)
+    ).map((title) => ({ title }));
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const inputProps = {
+    placeholder: 'Search anime by title',
+    value: searchTitle,
+    onChange: handleSearchChange,
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={searchTitle}
-          onChange={handleSearchChange}
-          placeholder="Search anime by title"
-          style={{ padding: '10px', fontSize: '16px', width: '300px', borderRadius: '5px', border: 'none', marginBottom: '10px' }}
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={(suggestion) => suggestion.title}
+          renderSuggestion={(suggestion) => <div>{suggestion.title}</div>}
+          inputProps={inputProps}
         />
-        <button type="submit" className="searchButton">Search</button>
+        <button type="submit" className="searchButton">
+          Search
+        </button>
       </form>
-      {data.anime && (
+      {!loading && !data?.anime && searched && (
+  <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
+    <img src={errorGif} alt="Error" />
+    <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
+  </div>
+      )}
+      {data?.anime && (
         <div className="searchResultContainer" style={{ position: 'relative' }}>
           <FaHeart className="heartIcon" onClick={handleFavorite} style={{ position: 'absolute', top: '10px', right: '10px', color: isFavorite ? 'red' : 'grey', cursor: 'pointer' }} />
           <div style={{ marginBottom: '10px', width: '300px', height: '300px' }}>
