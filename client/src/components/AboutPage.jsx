@@ -87,7 +87,7 @@ const AboutPage = () => {
                 padding: "10px",
               }}
             >
-              Description <br />
+              I'm an all around techie. I enjoy anime, x-men comics, and video games. Living a hybrid analog and digital lifestyle - I'm excited to add MERN Full Stack and Discord to my coding tools. I can also be found doing yoga and exploring culinary flavors with other Foodies. I know enough AI concepts to be a little dangerous, yet I mostly enjoy talking about the Singularity and AI pro/cons for now. <br />
               <br />
               Check out my Github! 🌸
               <br />
@@ -143,7 +143,7 @@ const AboutPage = () => {
                 padding: "10px",
               }}
             >
-              Description <br />
+              Hey, I'm David. My bio is just as elusive as my icon. <br />
               <br />
               Check out my Github! 🤖
               <br />
@@ -260,7 +260,7 @@ const AboutPage = () => {
                 padding: "10px",
               }}
             >
-              Description <br />
+              Hey there, I'm Somphang, but you can call me Pang! I'm venturing into the world of coding, eager to soak up knowledge like a sponge. Beyond the screen, you'll find me immersed in the vibrant world of anime, where imagination knows no bounds. And when the world slows down, you can catch me strolling through the park, finding inspiration in the whispering leaves and dancing sunlight. Let's embark on this coding journey together, where every line of code is a step closer to unlocking endless possibilities! <br />
               <br />
               Check out my Github! 👾
               <br />

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { FaHeart } from 'react-icons/fa';
+import loadingGif from './LoadingGIF.webp'; 
+import errorGif from './ErrorGIF.gif'; 
 import '../css/Button.css';
 
 const GET_ANIME = gql`
@@ -19,6 +21,8 @@ const AnimeSearch = () => {
   const [searchTitle, setSearchTitle] = useState("");
   const { title: defaultTitle } = useParams();
   const [queryTitle, setQueryTitle] = useState(defaultTitle || "");
+  const [isFavorite, setIsFavorite] = useState(false); // Track favorite status
+  const [searched, setSearched] = useState(false); // Track if search button was pressed
 
   const { loading, error, data } = useQuery(GET_ANIME, {
     variables: { title: queryTitle },
@@ -31,18 +35,34 @@ const AnimeSearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setQueryTitle(searchTitle);
+    setSearched(true); // Set searched to true when search button is pressed
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
 
   const handleFavorite = () => {
-    alert(`Added ${data.anime.title} to favorites`);
+    setIsFavorite(!isFavorite); // Toggle favorite status
   };
 
-  const handleUnfavorite = () => {
-    alert(`Removed ${data.anime.title} from favorites`);
-  };
+  if (loading) return <img src={loadingGif} alt="Loading..." />; // Display the loading GIF while loading
+  if (!data.anime && searched) { // Display no results only if search button was pressed
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={searchTitle}
+            onChange={handleSearchChange}
+            placeholder="Search anime by title"
+            style={{ padding: '10px', fontSize: '40px', width: '300px', borderRadius: '5px', border: 'none', marginBottom: '10px' }}
+          />
+          <button type="submit" className="searchButton">Search</button>
+        </form>
+        <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
+          <img src={errorGif} alt="Error" />
+          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -57,12 +77,13 @@ const AnimeSearch = () => {
         <button type="submit" className="searchButton">Search</button>
       </form>
       {data.anime && (
-        <div className="searchResultContainer">
-          <img src={data.anime.image} alt={data.anime.title} />
-          <FaHeart className="heartIcon" onClick={handleFavorite} />
-          <h1>{data.anime.title}</h1>
+        <div className="searchResultContainer" style={{ position: 'relative' }}>
+          <FaHeart className="heartIcon" onClick={handleFavorite} style={{ position: 'absolute', top: '10px', right: '10px', color: isFavorite ? 'red' : 'grey', cursor: 'pointer' }} />
+          <div style={{ marginBottom: '10px', width: '300px', height: '300px' }}>
+            <img src={data.anime.image} alt={data.anime.title} style={{ borderRadius: '5px', width: '100%', height: '100%' }} />
+          </div>
+          <h1 style={{ fontWeight: 'bold' }}>{data.anime.title}</h1>
           <p>{data.anime.description}</p>
-          <button className="unfavoriteButton" onClick={handleUnfavorite}>Unfavorite</button>
         </div>
       )}
     </div>
