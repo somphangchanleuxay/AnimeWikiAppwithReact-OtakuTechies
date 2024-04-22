@@ -6,6 +6,7 @@ const typeDefs = `
     username: String
     email: String
     password: String
+    favorites: [String]
   }
 
   type Anime {
@@ -32,8 +33,9 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!): Auth
     addAnime(title: String!, description: String!, image: String): Anime
     login(email: String!, password: String!): Auth
+    favAdd(someone: String!, title: String!): User
+    favRemove(someone: String!, title: String!): User
   }
 `;
 
 module.exports = typeDefs;
-
