@@ -15,12 +15,6 @@ const animeSchema = new Schema(
             type: String,
         },
     },
-    /*{
-      toJSON: {
-        getters: true,
-      },
-    }    
-    */
 );
 
 const Anime = model('Anime', animeSchema);

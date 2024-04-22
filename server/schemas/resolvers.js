@@ -27,13 +27,14 @@ const resolvers = {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
-      return { token, user: { _id: user._id, email: user.email, username: user.username } };
+      return { token, user: { _id: user._id, email: user.email, username: user.username , favorites: [] } };
     },
-    
+
     addAnime: async (parent, { title, description, image }) => {
       const anime = await Anime.create({ title, description, image });
       return { anime };
     },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -50,6 +51,32 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+
+    favAdd: async (parent, { someone, title }) => {
+      const user = await User.findOneAndUpdate(
+        { username: someone ,
+         "$push": { favorites: title } }
+      );
+      if(user) {
+      return user;
+      }
+      else {
+        console.log("Error, somoeone not found.")
+      }
+    },
+
+    favRemove: async (parent, { someone , title }) => {
+      const user = await User.findOneAndUpdate(
+        { username: someone,
+        "$pull": { favorites: title } }
+      );
+      if(user) {
+        return user;
+        }
+        else {
+          console.log("Error, somoeone not found.")
+        }
     },
   },
 };
