@@ -25,6 +25,7 @@ const Login = () => {
     event.preventDefault();
     try {
       const { data } = await login({ variables: { ...formState } });
+      console.log(data);
       if (data && data.login && data.login.token) {
         Auth.login(data.login.token);
       }

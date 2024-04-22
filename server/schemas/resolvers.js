@@ -54,20 +54,21 @@ const resolvers = {
       return { token, user };
     },
 
-    favAdd: async (parent, { someone, title }) => {
-      const user = await User.findOneAndUpdate(
-        { username: someone ,
-         "$push": { favorites: title } }
+    favAdd: async (parent, { title }, context) => {
+      console.log(context.user)
+      if (context.user){
+        const user = await User.findByIdAndUpdate(
+        { _id: context.user._id },
+        { $push: {favorites: title} },
+        { new: true }
       );
-      if(user) {
       return user;
-      }
-      else {
-        console.log("Error, somoeone not found.")
-      }
-    },
-
-    favRemove: async (parent, { someone , title }) => {
+      
+    } else {
+      throw AuthenticationError;
+    }
+  },
+    favRemove: async (parent, { title }, context) => {
       const user = await User.findOneAndUpdate(
         { username: someone,
         "$pull": { favorites: title } }
@@ -81,5 +82,6 @@ const resolvers = {
     },
   },
 };
+
 
 module.exports = resolvers;

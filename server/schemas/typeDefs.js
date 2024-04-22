@@ -33,8 +33,8 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!): Auth
     addAnime(title: String!, description: String!, image: String): Anime
     login(email: String!, password: String!): Auth
-    favAdd(someone: String!, title: String!): User
-    favRemove(someone: String!, title: String!): User
+    favAdd(title: String!): User
+    favRemove(title: String!): User
   }
 `;
 

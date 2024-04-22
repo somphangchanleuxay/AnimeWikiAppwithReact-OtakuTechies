@@ -35,3 +35,14 @@ export const SIGNUP_USER = gql`
     }
   }
 `;
+
+export const FAV_ADD = gql`
+mutation favAdd( $title: String!) {
+  favAdd(title: $title) {
+    _id
+    email
+    favorites
+    username
+  }
+}
+`;

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { useState } from 'react';
+import { gql, useQuery, useMutation} from '@apollo/client';
 import { useParams } from "react-router-dom";
 import { FaHeart } from 'react-icons/fa';
 import loadingGif from './LoadingGIF.webp'; 
 import errorGif from './ErrorGIF.gif'; 
 import '../css/Button.css';
+import { FAV_ADD } from '../utils/mutations';
+
+import AuthService from '../utils/auth';
 
 const GET_ANIME = gql`
   query GetAnime($title: String!) {
@@ -13,6 +16,28 @@ const GET_ANIME = gql`
       description
       image
       title
+    }
+  }
+`;
+
+// const ADD_FAVORITE = gql`
+//   mutation AddFavorite($someone: String!, $title: String!) {
+//     favAdd(someone: $someone, title: $title) {
+//       _id
+//       username
+//       email
+//       favorites
+//     }
+//   }
+// `;
+
+const REMOVE_FAVORITE = gql`
+  mutation RemoveFavorite($someone: String!, $title: String!) {
+    favRemove(someone: $someone, title: $title) {
+      _id
+      username
+      email
+      favorites
     }
   }
 `;
@@ -28,9 +53,13 @@ const AnimeSearch = () => {
     variables: { title: queryTitle },
   });
 
+  const [favAdd] = useMutation(FAV_ADD);
+  const [removeFavorite] = useMutation(REMOVE_FAVORITE);
+
   const handleSearchChange = (e) => {
     setSearchTitle(e.target.value);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,8 +67,31 @@ const AnimeSearch = () => {
     setSearched(true); // Set searched to true when search button is pressed
   };
 
-  const handleFavorite = () => {
-    setIsFavorite(!isFavorite); // Toggle favorite status
+  
+  const handleFavorite = async () => {
+    if (!AuthService.loggedIn()) {
+      // Handle case where user is not logged in
+      console.error("User must be logged in to toggle favorites.");
+      return; // Optionally, prompt the user to log in
+    }
+  
+    const userId = AuthService.getUserId(); // Use the correct function to get the user ID
+    if (!userId) {
+      console.error("No user ID found, unable to modify favorites.");
+      return;
+    }
+  
+    try {
+      const variables = { someone: userId, title: data.anime.title };
+      if (isFavorite) {
+        await removeFavorite({ variables });
+      } else {
+        await favAdd({ variables });
+      }
+      setIsFavorite(!isFavorite); // Toggle favorite status optimistically
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+    }
   };
 
   if (loading) return <img src={loadingGif} alt="Loading..." />; // Display the loading GIF while loading
