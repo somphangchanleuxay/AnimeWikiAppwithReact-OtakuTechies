@@ -13,8 +13,6 @@ const GET_ANIME = gql`
   }
 `;
 
-
-
 const AnimeSearch = () => {
   const [searchTitle, setSearchTitle] = useState(""); // State to hold the search title
   const { title: defaultTitle } = useParams(); // Get the title from URL params
