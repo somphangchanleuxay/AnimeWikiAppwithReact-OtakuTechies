@@ -57,7 +57,7 @@ const Homepage = () => {
           <AnimeTitle title="Death Note" />
           <AnimeTitle title="Solo Leveling" />
           <AnimeTitle title="One Piece" />
-          <AnimeTitle title="Hunter x Hunter (2011)" />
+          <AnimeTitle title="Hunter x Hunter" />
           <AnimeTitle title="One-Punch Man" />
           <AnimeTitle title="Tokyo Ghoul" />
           <AnimeTitle title="Chainsaw Man" />
