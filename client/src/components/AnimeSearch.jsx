@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 
@@ -34,6 +34,11 @@ const AnimeSearch = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const handleFavorite = () => {
+    // Implement your favorite functionality here
+    alert(`Added ${data.anime.title} to favorites`);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -44,13 +49,14 @@ const AnimeSearch = () => {
           placeholder="Search anime by title" 
           style={{ padding: '10px', fontSize: '16px', width: '300px', borderRadius: '5px', border: 'none', marginBottom: '10px' }} 
         />
-        <button type="submit">Search</button>
+        <button type="submit" style={{ padding: '10px', fontSize: '16px', borderRadius: '5px', border: 'none', backgroundColor: 'lightblue', color: 'white' }}>Search</button>
       </form>
       {data.anime && (
         <div>
           <h1>{data.anime.title}</h1>
           <p>{data.anime.description}</p>
           <img src={data.anime.image} alt={data.anime.title} />
+          <button onClick={handleFavorite} style={{ padding: '5px', fontSize: '14px', borderRadius: '3px', border: 'none', backgroundColor: 'lightblue', color: 'white', marginTop: '10px' }}>Add to Favorites</button>
         </div>
       )}
     </div>
