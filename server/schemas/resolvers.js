@@ -11,7 +11,8 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findById(context.user._id);
+        const user = await User.findById(context.user._id);
+        return user;
       }
       throw new AuthenticationError("You are not authenticated");
     },

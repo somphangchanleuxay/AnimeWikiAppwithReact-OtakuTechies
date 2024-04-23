@@ -73,6 +73,6 @@ Render: A cloud platform used for deploying and hosting the Otaki-Ani applicatio
 
   ## Questions
 
-  Deply: (https://animewikiappwithreact-otakutechies.onrender.com/)
+  Deploy: (https://animewikiappwithreact-otakutechies.onrender.com/)
 
   GitHub Repo: (https://github.com/somphangchanleuxay/AnimeWikiAppwithReact-OtakuTechies)
