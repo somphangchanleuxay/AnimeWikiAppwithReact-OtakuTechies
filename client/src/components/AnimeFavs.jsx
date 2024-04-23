@@ -22,6 +22,13 @@ const AnimeFavs = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
   return (
+    <div>
+      <h1 style={{
+              fontFamily: "Anime Ace",
+              fontSize: "50px",
+              color: "black",
+              fontWeight: 'bold'
+           }}>Favorites</h1>
     <ul>
     {data.user.favorites.map((fav) => (
      <li key={fav}> 
@@ -29,6 +36,7 @@ const AnimeFavs = () => {
      </li>
     ))}
     </ul>
+    </div>
   )
 };
 
