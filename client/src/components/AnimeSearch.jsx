@@ -5,6 +5,7 @@ import { FaHeart } from 'react-icons/fa';
 import Autosuggest from 'react-autosuggest';
 import loadingGif from './LoadingGIF.webp';
 import errorGif from './ErrorGIF.gif';
+
 import '../css/Button.css';
 
 const GET_ANIME = gql`
