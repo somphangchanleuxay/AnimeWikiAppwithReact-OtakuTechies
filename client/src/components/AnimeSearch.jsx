@@ -1,13 +1,11 @@
-
 import { useState } from 'react';
 import { gql, useQuery, useMutation} from '@apollo/client';
-
 import { useParams } from "react-router-dom";
 import { FaHeart } from 'react-icons/fa';
 import Autosuggest from 'react-autosuggest';
 import loadingGif from './LoadingGIF.webp';
 import errorGif from './ErrorGIF.gif';
-
+import { QUERY_ME } from '../utils/queries';
 import '../css/Button.css';
 import { FAV_ADD, FAV_REMOVE } from '../utils/mutations';
 
@@ -45,27 +43,29 @@ const AnimeSearch = () => {
     "Tokyo Ghoul",
     "Chainsaw Man"
   ];
+  const {data:meData} = useQuery(QUERY_ME, {
+    variables: { title: queryTitle },
+  });
 
   const { loading, error, data } = useQuery(GET_ANIME, {
     variables: { title: queryTitle },
   });
-
 
   const [favAdd] = useMutation(FAV_ADD);
   const [removeFavorite] = useMutation(FAV_REMOVE);
 
   const handleSearchChange = (e) => {
     setSearchTitle(e.target.value);
-
   };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setQueryTitle(searchTitle);
+    setIsFavorite(meData.me.favorites.includes(searchTitle))
     setSearched(true); // Set searched to true when search button is pressed
   };
-
 
   
   const handleFavorite = async () => {
@@ -83,7 +83,7 @@ const AnimeSearch = () => {
   
     try {
       const variables = { title: data.anime.title };
-      console.log(data)
+      setIsFavorite(!isFavorite)
       if (isFavorite) {
         await removeFavorite({ variables });
       } else {
@@ -93,7 +93,6 @@ const AnimeSearch = () => {
     } catch (error) {
       console.error('Error toggling favorite:', error);
     }
-
   };
 
   const getSuggestions = (inputValue) => {
@@ -133,10 +132,10 @@ const AnimeSearch = () => {
         </button>
       </form>
       {!loading && !data?.anime && searched && (
-        <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
-          <img src={errorGif} alt="Error" />
-          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
-        </div>
+  <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
+    <img src={errorGif} alt="Error" />
+    <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
+  </div>
       )}
       {data?.anime && (
         <div className="searchResultContainer" style={{ position: 'relative' }}>
