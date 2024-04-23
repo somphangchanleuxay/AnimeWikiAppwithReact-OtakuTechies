@@ -1,5 +1,5 @@
-const { User, Anime } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User, Anime } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -11,9 +11,9 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findById(context.user._id);
       }
-      throw AuthenticationError;
+      throw new AuthenticationError("You are not authenticated");
     },
     animes: async () => {
       return Anime.find();
@@ -23,12 +23,19 @@ const resolvers = {
     },
   },
 
-  Mutation:{
-
+  Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
-      return { token, user: { _id: user._id, email: user.email, username: user.username , favorites: [] } };
+      return {
+        token,
+        user: {
+          _id: user._id,
+          email: user.email,
+          username: user.username,
+          favorites: [],
+        },
+      };
     },
 
     addAnime: async (parent, { title, description, image }) => {
@@ -40,7 +47,7 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError("Invalid email or password");
       }
 
       const correctPw = await user.isCorrectPassword(password);
@@ -55,33 +62,32 @@ const resolvers = {
     },
 
     favAdd: async (parent, { title }, context) => {
-      console.log(context.user)
-      if (context.user){
+      console.log(context.user, title);
+      if (context.user) {
         const user = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        { $push: {favorites: title} },
-        { new: true }
-      );
-      return user;
-      
-    } else {
-      throw AuthenticationError;
-    }
-  },
-    favRemove: async (parent, { title }, context) => {
-      const user = await User.findOneAndUpdate(
-        { username: someone,
-        "$pull": { favorites: title } }
-      );
-      if(user) {
+          { _id: context.user._id },
+          { $push: { favorites: title } },
+          { new: true }
+        );
         return user;
-        }
-        else {
-          console.log("Error, somoeone not found.")
-        }
+      } else {
+        throw AuthenticationError;
+      }
+    },
+    favRemove: async (parent, { title }, context) => {
+      console.log(context.user, title);
+      if (context.user) {
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { favorites: title } },
+          { new: true }
+        );
+        return user;
+      } else {
+        throw AuthenticationError;
+      }
     },
   },
 };
-
 
 module.exports = resolvers;

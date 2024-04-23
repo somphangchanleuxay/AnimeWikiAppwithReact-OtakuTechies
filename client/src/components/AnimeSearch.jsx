@@ -5,7 +5,8 @@ import { FaHeart } from 'react-icons/fa';
 import loadingGif from './LoadingGIF.webp'; 
 import errorGif from './ErrorGIF.gif'; 
 import '../css/Button.css';
-import { FAV_ADD } from '../utils/mutations';
+import { FAV_ADD, FAV_REMOVE } from '../utils/mutations';
+
 
 import AuthService from '../utils/auth';
 
@@ -20,27 +21,6 @@ const GET_ANIME = gql`
   }
 `;
 
-// const ADD_FAVORITE = gql`
-//   mutation AddFavorite($someone: String!, $title: String!) {
-//     favAdd(someone: $someone, title: $title) {
-//       _id
-//       username
-//       email
-//       favorites
-//     }
-//   }
-// `;
-
-const REMOVE_FAVORITE = gql`
-  mutation RemoveFavorite($someone: String!, $title: String!) {
-    favRemove(someone: $someone, title: $title) {
-      _id
-      username
-      email
-      favorites
-    }
-  }
-`;
 
 const AnimeSearch = () => {
   const [searchTitle, setSearchTitle] = useState("");
@@ -54,7 +34,7 @@ const AnimeSearch = () => {
   });
 
   const [favAdd] = useMutation(FAV_ADD);
-  const [removeFavorite] = useMutation(REMOVE_FAVORITE);
+  const [removeFavorite] = useMutation(FAV_REMOVE);
 
   const handleSearchChange = (e) => {
     setSearchTitle(e.target.value);
@@ -82,7 +62,8 @@ const AnimeSearch = () => {
     }
   
     try {
-      const variables = { someone: userId, title: data.anime.title };
+      const variables = { title: data.anime.title };
+      console.log(data)
       if (isFavorite) {
         await removeFavorite({ variables });
       } else {
