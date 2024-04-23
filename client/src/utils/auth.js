@@ -39,7 +39,8 @@ class AuthService{
 
   getUserId() {
     const profile = this.getProfile();
-    return profile ? profile.id : null;
+    console.log(profile)
+    return profile ? profile.data._id : null;
   }
 
   

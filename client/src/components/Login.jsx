@@ -24,7 +24,8 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await login({ variables: { ...formState } });
+      const { data } = await login({ variables: { email: formState.email, password: formState.password } });
+      console.log(data);
       if (data && data.login && data.login.token) {
         Auth.login(data.login.token);
       }
