@@ -139,16 +139,19 @@ const Navbar = () => {
                 alignItems: "center",
                 fontSize: "70px",
                 color: "white",
+                marginBottom: isSmallerThan750 ? "20px" : "0", // Adjust margin bottom based on screen size
               }}
             >
               Otaku-Ani
             </div>
           </Link>
           {/* Navbar links */}
+          {/* Navbar links */}
           <Flex
             flex
             direction={isSmallerThan750 ? "column" : "row"}
             alignItems="center"
+            justifyContent="space-between" // Align items with space between them
           >
             <Link
               href="/home"
@@ -188,7 +191,7 @@ const Navbar = () => {
               mt={isSmallerThan750 ? 2 : 0}
               fontSize="24px"
               fontFamily="Unica One; Arial"
-              marginRight= "8px"
+              marginRight="35px"
               ml={4}
             >
               Contact
@@ -200,7 +203,7 @@ const Navbar = () => {
                   style={{
                     color: "white",
                     fontSize: "16px",
-                    marginRight: "4px",
+                    marginRight: "10px",
                     backgroundColor: "#3182ce",
                     width: "95px",
                     textAlign: "center",
@@ -258,17 +261,43 @@ const Navbar = () => {
             >
               Otaku-Ani
             </Link>
-            <Flex>
-              <Link href="/home" color="white" mr={24} fontSize="28px">
+            <Flex direction={isSmallerThan750 ? "column" : "row"}>
+              <Link
+                href="/home"
+                color="white"
+                fontFamily={"Unica One"}
+                mb={4}
+                mr={!isSmallerThan750 ? 12 : 0}
+                fontSize="28px"
+              >
                 Search
               </Link>
-              <Link href="/about" color="white" mr={24} fontSize="28px">
+              <Link
+                href="/about"
+                color="white"
+                fontFamily={"Unica One"}
+                mb={4}
+                mr={!isSmallerThan750 ? 12 : 0}
+                fontSize="28px"
+              >
                 About
               </Link>
-              <Link href="/services" color="white" mr={24} fontSize="28px">
+              <Link
+                href="/services"
+                color="white"
+                fontFamily={"Unica One"}
+                mb={4}
+                mr={!isSmallerThan750 ? 12 : 0}
+                fontSize="28px"
+              >
                 Services
               </Link>
-              <Link href="/contact" color="white" fontSize="28px">
+              <Link
+                href="/contact"
+                color="white"
+                fontFamily={"Unica One"}
+                fontSize="28px"
+              >
                 Contact
               </Link>
             </Flex>

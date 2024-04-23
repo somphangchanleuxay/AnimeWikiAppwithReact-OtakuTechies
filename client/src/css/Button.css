@@ -6,34 +6,8 @@
   border-radius: 5px;
   padding: 10px 20px;
   margin-left: 10px;
-  cursor: pointer;/* Button.css */
-  .searchButton {
-    background-color: rgba(var(--primary-color), 0.15);
-    border: 2px double transparent;
-    background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
-    color: rgba(var(--text-color), 0.8);
-  }
+  cursor: pointer;
   
-  .searchButton:hover {
-    background-color: rgba(var(--primary-color), 0.35);
-    border: 2px double transparent;
-    background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
-    color: rgba(var(--text-color), 0.9);
-  }
-  
-  .favoriteButton {
-    background-color: #ffc107;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .favoriteButton:hover {
-    background-color: #ffcd39;
-  }
   
   .unfavoriteButton {
     background-color: #f0f0f0;
@@ -50,20 +24,6 @@
 
 .searchButton:hover {
   background-color: #0056b3;
-}
-
-.favoriteButton {
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.favoriteButton:hover {
-  background-color: #ffcd39;
 }
 
 /* Search.css */
@@ -126,3 +86,51 @@
 .unfavoriteButton:hover {
   color: darkred;
 }
+
+/* Autosuggest styles */
+.react-autosuggest__container {
+  position: relative;
+  display: inline-block;
+  width: 300px; /* Adjust width as needed */
+  margin-bottom: 10px;
+}
+
+.react-autosuggest__input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: red;
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #c51010;
+}
+
