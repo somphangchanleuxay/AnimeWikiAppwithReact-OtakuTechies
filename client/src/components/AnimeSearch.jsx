@@ -132,10 +132,10 @@ const AnimeSearch = () => {
         </button>
       </form>
       {!loading && !data?.anime && searched && (
-  <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
-    <img src={errorGif} alt="Error" />
-    <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
-  </div>
+        <div style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px', textAlign: 'center' }}>
+          <img src={errorGif} alt="Error" />
+          <p style={{ fontWeight: 'bold', fontSize: '24px' }}>No results found.</p>
+        </div>
       )}
       {data?.anime && (
         <div className="searchResultContainer" style={{ position: 'relative' }}>
@@ -147,7 +147,7 @@ const AnimeSearch = () => {
           <p>{data.anime.description}</p>
         </div>
       )}
-    </div>
+    </div> 
   );
 };
 

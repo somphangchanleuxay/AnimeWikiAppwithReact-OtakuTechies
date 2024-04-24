@@ -12,9 +12,15 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);
-        return user;
+        if (user) {
+          const favoriteAnime = await Anime.find({ _id: { $in: user.favorites } });
+          return { ...user.toObject(), favorites: favoriteAnime };
+        } else {
+          throw new AuthenticationError("User not found");
+        }
+      } else {
+        throw new AuthenticationError("You are not authenticated");
       }
-      throw new AuthenticationError("You are not authenticated");
     },
     animes: async () => {
       return Anime.find();
@@ -41,8 +47,9 @@ const resolvers = {
 
     addAnime: async (parent, { title, description, image }) => {
       const anime = await Anime.create({ title, description, image });
-      return { anime };
+      return anime;
     },
+    
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -63,29 +70,28 @@ const resolvers = {
     },
 
     favAdd: async (parent, { title }, context) => {
-      console.log(context.user, title);
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { favorites: title } },
           { new: true }
         );
-        return user;
+        return user.populate('favorites').execPopulate(); // Populate favorites with Anime objects
       } else {
-        throw AuthenticationError;
+        throw new AuthenticationError("You are not authenticated");
       }
     },
+
     favRemove: async (parent, { title }, context) => {
-      console.log(context.user, title);
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $pull: { favorites: title } },
           { new: true }
         );
-        return user;
+        return user.populate('favorites').execPopulate(); // Populate favorites with Anime objects
       } else {
-        throw AuthenticationError;
+        throw new AuthenticationError("You are not authenticated");
       }
     },
   },
