@@ -63,7 +63,7 @@ const AnimeSearch = () => {
     e.preventDefault();
 
     setQueryTitle(searchTitle);
-    setIsFavorite(meData.me.favorites.includes(searchTitle))
+    setIsFavorite(meData?.me.favorites.includes(searchTitle))
     setSearched(true); // Set searched to true when search button is pressed
   };
 
@@ -83,12 +83,18 @@ const AnimeSearch = () => {
   
     try {
       const variables = { title: data.anime.title };
-      setIsFavorite(!isFavorite)
-      if (isFavorite) {
+      setIsFavorite(!isFavorite);
+  
+      // Check if favorites array exists and if searchTitle is included
+      const favorites = meData?.me?.favorites || [];
+      const isAlreadyFavorite = favorites.includes(searchTitle);
+  
+      if (isFavorite && isAlreadyFavorite) {
         await removeFavorite({ variables });
-      } else {
+      } else if (!isFavorite && !isAlreadyFavorite) {
         await favAdd({ variables });
       }
+  
       setIsFavorite(!isFavorite); // Toggle favorite status optimistically
     } catch (error) {
       console.error('Error toggling favorite:', error);

@@ -42,7 +42,7 @@ mutation favAdd( $title: String!) {
   favAdd(title: $title) {
     _id
     email
-    favorites
+    favorites 
     username
   }
 }
@@ -53,7 +53,7 @@ mutation favRemove( $title: String!) {
   favRemove(title: $title) {
     _id
     email
-    favorites
+    favorites 
     username
   }
 }
